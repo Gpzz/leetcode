@@ -11,16 +11,13 @@ class Solution:
         # Set pointers to leftmost and rightmost bars
         left, right = 0, len(height) - 1
 
-        # Set max_area to volume held by leftmost and rightmost bars
-        max_area = min(height[left], height[right]) * (right - left)
+        # Initialize area variable
+        area = 0
 
         # Move pointers slowly together and check new area on each loop
         while left < right:
-            # If new area is larger than the max area then update the max_area variable.
-            current_area = min(height[left], height[right]) * (right - left)
-
-            if current_area > max_area:
-                max_area = current_area
+            # If new area is larger than the current max area then update the area variable.
+            area = max(area, min(height[left], height[right]) * (right - left))
 
             # We move the shortest of the two current bars inwards on each loop.
             if height[left] < height[right]:
@@ -28,7 +25,7 @@ class Solution:
             else:
                 right -= 1
 
-        return max_area
+        return area
 
 # @lc code=end
 
